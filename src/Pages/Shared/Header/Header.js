@@ -2,17 +2,24 @@ import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import LeftSideNav from '../LeftSideNav/LeftSideNav';
 
 const Header = () => {
     return (
-        <Navbar bg="dark" variant="dark">
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
-                <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-                <Nav className="me-auto">
-                    <Nav.Link href="#home">Home</Nav.Link>
-                    <Nav.Link href="#features">Categories</Nav.Link>
-                    <Nav.Link href="#pricing">News</Nav.Link>
-                </Nav>
+                <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Collapse id="responsive-navbar-nav">
+                    <Nav className="me-auto">
+                        <Nav.Link href="#features">Home</Nav.Link>
+                        <Nav.Link href="#pricing">News</Nav.Link>
+                        <Nav.Link href="#pricing">Categories</Nav.Link>
+                    </Nav>
+                    <Nav className='d-lg-none'>
+                        <LeftSideNav/>
+                    </Nav>
+                </Navbar.Collapse>
             </Container>
         </Navbar>
     );

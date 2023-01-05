@@ -14,7 +14,7 @@ const LeftSideNav = () => {
     }, []);
 
     return (
-        <div>
+        <div className='d-none d-lg-block'>
             {
                 categories.map(category => <p key={category.id}>
                     <NavLink to={`/category/${category.id}`}>{category.name}</NavLink>
