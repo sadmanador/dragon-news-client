@@ -9,8 +9,8 @@ const RightSideNav = () => {
     return (
         <div>
             <ButtonGroup vertical className="d-grid gap-2">
-                <Button size="lg" variant='outline-primary'>Sign in with <FaGoogle /></Button>
-                <Button size="lg" variant='outline-dark'>Sign in with <FaGithub /></Button>
+                <Button size="lg" variant='outline-primary' className='w-100 px-5'>Sign in with <FaGoogle /></Button>
+                <Button size="lg" variant='outline-dark' className='w-100 px-5'>Sign in with <FaGithub /></Button>
             </ButtonGroup>
             <ListGroup className='my-4'>
                 <ListGroup.Item><FaFacebook/> Facebook</ListGroup.Item>

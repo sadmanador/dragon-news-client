@@ -15,7 +15,7 @@ const BrandCarousel = () => {
                 <Carousel.Item>
                     <img
                         className="d-block w-100"
-                        src="/assets/brands/Brand1.png"
+                        src="/assets/brands/Brand2.png"
                         alt="Second slide"
                     />
                 </Carousel.Item>
