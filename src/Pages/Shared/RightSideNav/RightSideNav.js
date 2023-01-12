@@ -28,12 +28,12 @@ const RightSideNav = () => {
                     <Button size="lg" variant='outline-dark' className='w-100 px-5'>Sign in with <FaGithub /></Button>
                 </ButtonGroup>
             }
-            <ListGroup className='my-4'>
-                <ListGroup.Item><FaFacebook /> Facebook</ListGroup.Item>
-                <ListGroup.Item><FaWhatsapp /> WhatsApp</ListGroup.Item>
-                <ListGroup.Item><FaTwitter /> Twitter</ListGroup.Item>
-                <ListGroup.Item><FaTwitch /> Twitch</ListGroup.Item>
-                <ListGroup.Item><FaYoutube /> Youtube</ListGroup.Item>
+            <ListGroup className='my-3'>
+                <ListGroup.Item><FaFacebook className='me-2'/> Facebook</ListGroup.Item>
+                <ListGroup.Item><FaWhatsapp className='me-2'/> WhatsApp</ListGroup.Item>
+                <ListGroup.Item><FaTwitter className='me-2'/> Twitter</ListGroup.Item>
+                <ListGroup.Item><FaTwitch className='me-2'/> Twitch</ListGroup.Item>
+                <ListGroup.Item><FaYoutube className='me-2'/> Youtube</ListGroup.Item>
             </ListGroup>
             <BrandCarousel></BrandCarousel>
         </div>

@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Image } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -11,7 +11,7 @@ import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import LeftSideNav from '../LeftSideNav/LeftSideNav';
 
 const Header = () => {
-    const { user, loggingOut, createUser, userLogIn } = useContext(AuthContext);
+    const { user, loggingOut, createUser, userLogIn, updateDisplayName} = useContext(AuthContext);
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
     const [error, setError] = useState(null);
@@ -47,16 +47,19 @@ const Header = () => {
             .then(result => {
                 const user = result.user;
                 navigate('/');
+                updateDisplayName(name);
                 form.reset();
             })
             .catch(error => setError(error))
     }
 
+    
+
     const handleLogOut = () => {
         loggingOut();
     }
 
-    console.log(user);
+    // console.log(user);
     return (
         <div>
             <Navbar sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark" className='mb-4'>
@@ -152,20 +155,20 @@ const Header = () => {
                             <Form onSubmit={handleRegister}>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                     <Form.Label>User Name</Form.Label>
-                                    <Form.Control type="text" placeholder="Enter user name" name='name' />
+                                    <Form.Control type="text" placeholder="Enter user name" name='name' required/>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                     <Form.Label>Email address</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email" name='email' />
+                                    <Form.Control type="email" placeholder="Enter email" name='email' required/>
                                 </Form.Group>
 
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Password</Form.Label>
-                                    <Form.Control type="password" placeholder="Password" name='password' />
+                                    <Form.Control type="password" placeholder="Password" name='password' required/>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Confirm Password</Form.Label>
-                                    <Form.Control type="password" placeholder="Confirm Password" name='confirm_password' />
+                                    <Form.Control type="password" placeholder="Confirm Password" name='confirm_password' required/>
                                 </Form.Group>
                                 <Button variant="primary" type="submit">
                                     Register
