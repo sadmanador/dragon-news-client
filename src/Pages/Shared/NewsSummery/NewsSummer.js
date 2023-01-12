@@ -15,7 +15,7 @@ const NewsSummer = ({ news }) => {
                 <div className='d-flex'>
                     <Image className='me-3' src={img} alt="Author-img" style={{ width: "50px", height: "100%" }} roundedCircle />
                     <div>
-                        <p>{name}</p>
+                        <p className='mb-0'>{name}</p>
                         <p>{published_date}</p>
                     </div>
                 </div>

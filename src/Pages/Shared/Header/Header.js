@@ -1,47 +1,53 @@
 import React, { useContext, useRef, useState } from 'react';
+import { Button, Image } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import LeftSideNav from '../LeftSideNav/LeftSideNav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
-import { Button, Image } from 'react-bootstrap';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
+import LeftSideNav from '../LeftSideNav/LeftSideNav';
 
 const Header = () => {
-    const { user, loggingOut, createUser } = useContext(AuthContext);
-
+    const { user, loggingOut, createUser, userLogIn } = useContext(AuthContext);
+    const [error, setError] = useState(null);
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
 
-    const inpName = useRef(null);
-    const inpEmail = useRef(null);
-    const inpPassword = useRef(null);
-    const inpConfirmPassword = useRef(null);
 
     const handleLogIN = event => {
         event.preventDefault();
-        const email = inpEmail.current.value;
-        const password = inpPassword.current.value;
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
 
-        console.log(email, password);
+
+        userLogIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                form.reset();
+            })
+            .catch(error => setError(error))
     }
 
     const handleRegister = event => {
         event.preventDefault();
-        const name = inpName.current.value;
-        const email = inpEmail.current.value;
-        const password = inpPassword.current.value;
-        const confirmPassword = inpConfirmPassword.current.value;
+        const form = event.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        const confirmPassword = form.confirm_password.value;
+
 
         createUser(email, password)
-        .then(result=> {
-            const user = result.user;
-            console.log(user);
-            event.target.reset();
-        })
-        .catch(error=>console.error(error))
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                form.reset();
+            })
+            .catch(error => setError(error))
     }
 
     const handleLogOut = () => {
@@ -81,7 +87,7 @@ const Header = () => {
                                         </>
                                 }
                             </Nav.Link>
-                            <Nav.Link eventKey={2} href="#memes">
+                            <Nav.Link href="#memes">
                                 Dank memes
                             </Nav.Link>
                         </Nav>
@@ -101,15 +107,15 @@ const Header = () => {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form onClick={handleLogIN}>
+                    <Form onSubmit={handleLogIN}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" name="email" required ref={inpEmail} />
+                            <Form.Control type="email" placeholder="Enter email" name="email" required />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" name="password" required ref={inpPassword} />
+                            <Form.Control type="password" placeholder="Password" name="password" required />
                         </Form.Group>
                         <Button variant="primary" type="submit">
                             Log In
@@ -117,7 +123,11 @@ const Header = () => {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer >
-                    <h4 className='text-center'>Error text</h4>
+                    <h4 className='text-center'>
+                        {
+                            error && <p>{error}</p>
+                        }
+                    </h4>
                 </Modal.Footer>
             </Modal>
             <Modal
@@ -133,23 +143,25 @@ const Header = () => {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form onClick={handleRegister}>
+                    <Form
+                        onSubmit={handleRegister}
+                    >
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>User Name</Form.Label>
-                            <Form.Control type="text" placeholder="Enter user name" name='name' ref={inpName}/>
+                            <Form.Control type="text" placeholder="Enter user name" name='name' />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" name='email' ref={inpEmail}/>
+                            <Form.Control type="email" placeholder="Enter email" name='email' />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" name='password' ref={inpPassword}/>
+                            <Form.Control type="password" placeholder="Password" name='password' />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Confirm Password</Form.Label>
-                            <Form.Control type="password" placeholder="Confirm Password" name='confirm_password' ref={inpConfirmPassword}/>
+                            <Form.Control type="password" placeholder="Confirm Password" name='confirm_password' />
                         </Form.Group>
                         <Button variant="primary" type="submit">
                             Register
@@ -157,7 +169,11 @@ const Header = () => {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer >
-                    <h4 className='text-center'>Error text</h4>
+                    <h4 className='text-center'>
+                        {
+                            error && <p>{error}</p>
+                        }
+                    </h4>
                 </Modal.Footer>
             </Modal>
         </div>

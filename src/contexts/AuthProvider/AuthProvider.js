@@ -19,7 +19,9 @@ const AuthProvider = ({ children }) => {
 
     const createUser = (email, password) => createUserWithEmailAndPassword(auth, email, password);
 
-    const authInfo = { user, providerLogin, loggingOut, createUser };
+    const userLogIn = (email, password) => signInWithEmailAndPassword(auth, email, password);
+
+    const authInfo = { user, providerLogin, loggingOut, createUser, userLogIn };
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
