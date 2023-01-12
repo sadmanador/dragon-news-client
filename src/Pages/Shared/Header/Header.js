@@ -14,7 +14,7 @@ const Header = () => {
     const { user, loggingOut, createUser, userLogIn, updateDisplayName} = useContext(AuthContext);
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState("");
     const navigate = useNavigate();
 
 
@@ -42,6 +42,19 @@ const Header = () => {
         const password = form.password.value;
         const confirmPassword = form.confirm_password.value;
 
+        if(password !== confirmPassword){
+            setError("Password and Confirm Password does not match");
+            return;
+        }
+        if(password.length < 6){
+            setError("Password must be of 6 Characters long.");
+            return;
+        }
+        if (!/(?=.*[a-z])/.test(password)) {
+            setError('At least one character is required');
+            return;
+        }
+        setError('');
 
         createUser(email, password)
             .then(result => {
