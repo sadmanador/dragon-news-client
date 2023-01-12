@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -7,13 +7,42 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import { Button, Image } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
 
 const Header = () => {
-    const { user, loggingOut } = useContext(AuthContext);
+    const { user, loggingOut, createUser } = useContext(AuthContext);
 
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
 
+    const inpName = useRef(null);
+    const inpEmail = useRef(null);
+    const inpPassword = useRef(null);
+    const inpConfirmPassword = useRef(null);
+
+    const handleLogIN = event => {
+        event.preventDefault();
+        const email = inpEmail.current.value;
+        const password = inpPassword.current.value;
+
+        console.log(email, password);
+    }
+
+    const handleRegister = event => {
+        event.preventDefault();
+        const name = inpName.current.value;
+        const email = inpEmail.current.value;
+        const password = inpPassword.current.value;
+        const confirmPassword = inpConfirmPassword.current.value;
+
+        createUser(email, password)
+        .then(result=> {
+            const user = result.user;
+            console.log(user);
+            event.target.reset();
+        })
+        .catch(error=>console.error(error))
+    }
 
     const handleLogOut = () => {
         loggingOut();
@@ -21,7 +50,7 @@ const Header = () => {
 
     return (
         <div>
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className='mb-4'>
+            <Navbar sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark" className='mb-4'>
                 <Container>
                     <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -71,11 +100,24 @@ const Header = () => {
                         Small Modal
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>...</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary">
-                        Save Changes
-                    </Button>
+                <Modal.Body>
+                    <Form onClick={handleLogIN}>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Email address</Form.Label>
+                            <Form.Control type="email" placeholder="Enter email" name="email" required ref={inpEmail} />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" placeholder="Password" name="password" required ref={inpPassword} />
+                        </Form.Group>
+                        <Button variant="primary" type="submit">
+                            Log In
+                        </Button>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer >
+                    <h4 className='text-center'>Error text</h4>
                 </Modal.Footer>
             </Modal>
             <Modal
@@ -90,11 +132,32 @@ const Header = () => {
                         Large Modal
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body>...</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary">
-                        Save Changes
-                    </Button>
+                <Modal.Body>
+                    <Form onClick={handleRegister}>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>User Name</Form.Label>
+                            <Form.Control type="text" placeholder="Enter user name" name='name' ref={inpName}/>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                            <Form.Label>Email address</Form.Label>
+                            <Form.Control type="email" placeholder="Enter email" name='email' ref={inpEmail}/>
+                        </Form.Group>
+
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" placeholder="Password" name='password' ref={inpPassword}/>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicPassword">
+                            <Form.Label>Confirm Password</Form.Label>
+                            <Form.Control type="password" placeholder="Confirm Password" name='confirm_password' ref={inpConfirmPassword}/>
+                        </Form.Group>
+                        <Button variant="primary" type="submit">
+                            Register
+                        </Button>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer >
+                    <h4 className='text-center'>Error text</h4>
                 </Modal.Footer>
             </Modal>
         </div>
