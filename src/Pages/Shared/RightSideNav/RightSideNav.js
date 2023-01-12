@@ -8,7 +8,7 @@ import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
 
 const RightSideNav = () => {
-    const { providerLogin } = useContext(AuthContext);
+    const { user, providerLogin } = useContext(AuthContext);
 
     const googleProvider = new GoogleAuthProvider();
 
@@ -16,16 +16,18 @@ const RightSideNav = () => {
         providerLogin(googleProvider)
             .then(result => {
                 const user = result.user;
-                console.log(user);
             })
             .catch(error => console.error(error))
     }
     return (
         <div>
-            <ButtonGroup vertical className="d-grid gap-2">
-                <Button onClick={handleGoogleSignIn} size="lg" variant='outline-primary' className='w-100 px-5'>Sign in with <FaGoogle /></Button>
-                <Button size="lg" variant='outline-dark' className='w-100 px-5'>Sign in with <FaGithub /></Button>
-            </ButtonGroup>
+            {
+                !user?.uid &&
+                <ButtonGroup vertical className="d-grid gap-2">
+                    <Button onClick={handleGoogleSignIn} size="lg" variant='outline-primary' className='w-100 px-5'>Sign in with <FaGoogle /></Button>
+                    <Button size="lg" variant='outline-dark' className='w-100 px-5'>Sign in with <FaGithub /></Button>
+                </ButtonGroup>
+            }
             <ListGroup className='my-4'>
                 <ListGroup.Item><FaFacebook /> Facebook</ListGroup.Item>
                 <ListGroup.Item><FaWhatsapp /> WhatsApp</ListGroup.Item>

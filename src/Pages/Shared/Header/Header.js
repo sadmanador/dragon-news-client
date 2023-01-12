@@ -6,14 +6,16 @@ import Modal from 'react-bootstrap/Modal';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import LeftSideNav from '../LeftSideNav/LeftSideNav';
 
 const Header = () => {
     const { user, loggingOut, createUser, userLogIn } = useContext(AuthContext);
-    const [error, setError] = useState(null);
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
 
     const handleLogIN = event => {
@@ -26,7 +28,7 @@ const Header = () => {
         userLogIn(email, password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
+                navigate('/')
                 form.reset();
             })
             .catch(error => setError(error))
@@ -44,7 +46,7 @@ const Header = () => {
         createUser(email, password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
+                navigate('/');
                 form.reset();
             })
             .catch(error => setError(error))
@@ -54,6 +56,7 @@ const Header = () => {
         loggingOut();
     }
 
+    console.log(user);
     return (
         <div>
             <Navbar sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark" className='mb-4'>
@@ -107,28 +110,29 @@ const Header = () => {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form onSubmit={handleLogIN}>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" name="email" required />
-                        </Form.Group>
+                    {
+                        !user?.uid ?
+                            <Form onSubmit={handleLogIN}>
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Label>Email address</Form.Label>
+                                    <Form.Control type="email" placeholder="Enter email" name="email" required />
+                                </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" name="password" required />
-                        </Form.Group>
-                        <Button variant="primary" type="submit">
-                            Log In
-                        </Button>
-                    </Form>
+                                <Form.Group className="mb-3" controlId="formBasicPassword">
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control type="password" placeholder="Password" name="password" required />
+                                </Form.Group>
+                                <Button variant="primary" type="submit">
+                                    Log In
+                                </Button>
+                            </Form>
+                            :
+                            <p>User successfully logged in.</p>
+                    }
                 </Modal.Body>
-                <Modal.Footer >
-                    <h4 className='text-center'>
-                        {
-                            error && <p>{error}</p>
-                        }
-                    </h4>
-                </Modal.Footer>
+                {
+                    error && <Modal.Footer>{error}</Modal.Footer>
+                }
             </Modal>
             <Modal
                 centered
@@ -143,38 +147,37 @@ const Header = () => {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form
-                        onSubmit={handleRegister}
-                    >
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label>User Name</Form.Label>
-                            <Form.Control type="text" placeholder="Enter user name" name='name' />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" name='email' />
-                        </Form.Group>
+                    {
+                        !user?.uid ?
+                            <Form onSubmit={handleRegister}>
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Label>User Name</Form.Label>
+                                    <Form.Control type="text" placeholder="Enter user name" name='name' />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Label>Email address</Form.Label>
+                                    <Form.Control type="email" placeholder="Enter email" name='email' />
+                                </Form.Group>
 
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" name='password' />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="formBasicPassword">
-                            <Form.Label>Confirm Password</Form.Label>
-                            <Form.Control type="password" placeholder="Confirm Password" name='confirm_password' />
-                        </Form.Group>
-                        <Button variant="primary" type="submit">
-                            Register
-                        </Button>
-                    </Form>
+                                <Form.Group className="mb-3" controlId="formBasicPassword">
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control type="password" placeholder="Password" name='password' />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formBasicPassword">
+                                    <Form.Label>Confirm Password</Form.Label>
+                                    <Form.Control type="password" placeholder="Confirm Password" name='confirm_password' />
+                                </Form.Group>
+                                <Button variant="primary" type="submit">
+                                    Register
+                                </Button>
+                            </Form>
+                            :
+                            <p>Successfully user created</p>
+                    }
                 </Modal.Body>
-                <Modal.Footer >
-                    <h4 className='text-center'>
-                        {
-                            error && <p>{error}</p>
-                        }
-                    </h4>
-                </Modal.Footer>
+                {
+                    error && <Modal.Footer>{error}</Modal.Footer>
+                }
             </Modal>
         </div>
     );
