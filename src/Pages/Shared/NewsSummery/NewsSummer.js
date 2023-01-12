@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 
 
 const NewsSummer = ({ news }) => {
-    console.log(news);
+
     const { author, category_id, thumbnail_url, title, total_view, rating, details, _id } = news;
     const { img, name, published_date } = author;
-    const { number } = rating
+    const { number } = rating;
     return (
         <Card className="mb-4 shadow">
             <Card.Header>

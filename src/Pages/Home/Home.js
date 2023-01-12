@@ -7,10 +7,11 @@ const Home = () => {
     return (
         <div>
             <h1>Dragon news: {allNews.length}</h1>
+
             {
                 allNews.map(news => <NewsSummer
-                key={news._id}
-                news={news}
+                    key={news._id}
+                    news={news}
                 >
                 </NewsSummer>)
             }
