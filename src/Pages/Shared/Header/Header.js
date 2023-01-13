@@ -14,7 +14,7 @@ const Header = () => {
     const { user, loggingOut, createUser, userLogIn, updateDisplayName} = useContext(AuthContext);
     const [login, setLogin] = useState(false);
     const [register, setRegister] = useState(false);
-    const [error, setError] = useState("");
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
 
@@ -28,7 +28,8 @@ const Header = () => {
         userLogIn(email, password)
             .then(result => {
                 const user = result.user;
-                navigate('/')
+                navigate('/');
+                setLogin(false);
                 form.reset();
             })
             .catch(error => setError(error))
@@ -54,19 +55,19 @@ const Header = () => {
             setError('At least one character is required');
             return;
         }
-        setError('');
+        setError(null);
 
         createUser(email, password)
             .then(result => {
                 const user = result.user;
                 navigate('/');
                 updateDisplayName(name);
+                setRegister(false);
                 form.reset();
             })
             .catch(error => setError(error))
     }
 
-    
 
     const handleLogOut = () => {
         loggingOut();
@@ -131,12 +132,12 @@ const Header = () => {
                             <Form onSubmit={handleLogIN}>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                     <Form.Label>Email address</Form.Label>
-                                    <Form.Control type="email" placeholder="Enter email" name="email" required />
+                                    <Form.Control type="email" placeholder="Enter email" name="email" required/>
                                 </Form.Group>
 
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
                                     <Form.Label>Password</Form.Label>
-                                    <Form.Control type="password" placeholder="Password" name="password" required />
+                                    <Form.Control type="password" placeholder="Password" name="password" required/>
                                 </Form.Group>
                                 <Button variant="primary" type="submit">
                                     Log In
