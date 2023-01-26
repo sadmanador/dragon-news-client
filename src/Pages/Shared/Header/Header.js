@@ -32,13 +32,14 @@ const Header = () => {
                 setLogin(false);
                 form.reset();
             })
-            .catch(error => setError(error))
+            .catch(error => setError(error.message))
     }
 
     const handleRegister = event => {
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
+        const photoURL = form.photoURL.value;
         const email = form.email.value;
         const password = form.password.value;
         const confirmPassword = form.confirm_password.value;
@@ -65,7 +66,7 @@ const Header = () => {
                 setRegister(false);
                 form.reset();
             })
-            .catch(error => setError(error))
+            .catch(error => setError(error.message))
     }
 
 
@@ -170,6 +171,10 @@ const Header = () => {
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                     <Form.Label>User Name</Form.Label>
                                     <Form.Control type="text" placeholder="Enter user name" name='name' required/>
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Label>Photo URL</Form.Label>
+                                    <Form.Control type="text" placeholder="Insert the url of photo" name='photoURL' required/>
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                     <Form.Label>Email address</Form.Label>
