@@ -12,17 +12,17 @@ export const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>,
-                loader: ({params}) => fetch(`http://localhost:5000/news`)
+                loader: ({params}) => fetch(`https://dragon-news-server-two-silk.vercel.app/news`)
             },
             {
                 path: '/news/:id',
                 element: <News></News>,
-                loader: ({params}) => fetch(`http://localhost:5000/news/${params.id}`)
+                loader: ({params}) => fetch(`https://dragon-news-server-two-silk.vercel.app/news/${params.id}`)
             },
             {
                 path: '/category/:id',
                 element: <Categories></Categories>,
-                loader: ({params}) => fetch(`http://localhost:5000/category/${params.id}`)
+                loader: ({params}) => fetch(`https://dragon-news-server-two-silk.vercel.app/category/${params.id}`)
             }
         ]
     }
