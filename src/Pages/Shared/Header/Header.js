@@ -108,9 +108,6 @@ const Header = () => {
                                         </>
                                 }
                             </Nav.Link>
-                            <Nav.Link href="#memes">
-                                Dank memes
-                            </Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
