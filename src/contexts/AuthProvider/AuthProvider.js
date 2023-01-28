@@ -18,20 +18,27 @@ const AuthProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [login, setLogin] = useState(false);
   const [register, setRegister] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const providerLogin = (provider) => {
+    setLoading(true);
     return signInWithPopup(auth, provider);
   };
 
   const loggingOut = () => {
-    signOut(auth);
+    setLoading(true);
+    return signOut(auth);
   };
 
-  const createUser = (email, password) =>
-    createUserWithEmailAndPassword(auth, email, password);
+  const createUser = (email, password) => {
+    setLoading(true);
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
 
-  const userLogIn = (email, password) =>
+  const userLogIn = (email, password) => {
+    setLoading(true);
     signInWithEmailAndPassword(auth, email, password);
+  };
 
   const updateDisplayName = (name) => {
     updateProfile(auth.currentUser, {
@@ -52,11 +59,15 @@ const AuthProvider = ({ children }) => {
     setRegister,
     login,
     register,
+    error,
+    loading,
+    setLoading,
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setLoading(false);
     });
     return () => {
       unsubscribe();

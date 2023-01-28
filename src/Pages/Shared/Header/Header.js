@@ -20,10 +20,11 @@ const Header = () => {
     setLogin,
     setRegister,
     login,
-    register, error, setError
+    register
   } = useContext(AuthContext);
 
-  
+  const [error, setError] = useState(null);
+
   const navigate = useNavigate();
 
   const handleLogIN = (event) => {
@@ -39,7 +40,7 @@ const Header = () => {
         setLogin(false);
         form.reset();
       })
-      .catch((error) => setError(error.message));
+      .catch(error => setError(error.message));
   };
 
   const handleRegister = (event) => {
@@ -73,7 +74,7 @@ const Header = () => {
         setRegister(false);
         form.reset();
       })
-      .catch((error) => setError(error.message));
+      .catch(error => setError(error.message));
   };
 
   const handleLogOut = () => {
