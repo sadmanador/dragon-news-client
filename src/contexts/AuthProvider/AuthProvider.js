@@ -19,6 +19,7 @@ const AuthProvider = ({ children }) => {
   const [login, setLogin] = useState(false);
   const [register, setRegister] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [checked, setChecked] = useState(false);
 
   const providerLogin = (provider) => {
     setLoading(true);
@@ -40,13 +41,28 @@ const AuthProvider = ({ children }) => {
     signInWithEmailAndPassword(auth, email, password);
   };
 
-  const updateDisplayName = (name) => {
+  const updateDisplayName = (name, photoUrl) => {
     updateProfile(auth.currentUser, {
       displayName: name,
+      photoURL: photoUrl,
     })
       .then(() => {})
       .catch((error) => setError(error));
   };
+
+  const handleChecked = event => {
+    setChecked(event.target.checked);
+  }
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setLoading(false);
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   const authInfo = {
     user,
@@ -62,17 +78,11 @@ const AuthProvider = ({ children }) => {
     error,
     loading,
     setLoading,
+    checked,
+    setChecked,
+    handleChecked
   };
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      setLoading(false);
-    });
-    return () => {
-      unsubscribe();
-    };
-  }, []);
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );

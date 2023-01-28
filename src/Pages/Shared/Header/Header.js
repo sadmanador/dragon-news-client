@@ -6,7 +6,7 @@ import Modal from "react-bootstrap/Modal";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 import LeftSideNav from "../LeftSideNav/LeftSideNav";
 
@@ -20,7 +20,10 @@ const Header = () => {
     setLogin,
     setRegister,
     login,
-    register
+    register,
+    checked,
+    setChecked,
+    handleChecked
   } = useContext(AuthContext);
 
   const [error, setError] = useState(null);
@@ -40,14 +43,14 @@ const Header = () => {
         setLogin(false);
         form.reset();
       })
-      .catch(error => setError(error.message));
+      .catch((error) => setError(error.message));
   };
 
   const handleRegister = (event) => {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
-    const photoURL = form.photoURL.value;
+    const photoUrl = form.photoURL.value;
     const email = form.email.value;
     const password = form.password.value;
     const confirmPassword = form.confirm_password.value;
@@ -69,12 +72,12 @@ const Header = () => {
     createUser(email, password)
       .then((result) => {
         const user = result.user;
-        navigate("/");
-        updateDisplayName(name);
+        updateDisplayName(name, photoUrl);
         setRegister(false);
         form.reset();
+        navigate("/");
       })
-      .catch(error => setError(error.message));
+      .catch((error) => setError(error.message));
   };
 
   const handleLogOut = () => {
@@ -97,8 +100,8 @@ const Header = () => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="/news">News</Nav.Link>
-              <Nav.Link href="#pricing">Pricing</Nav.Link>
+              <Nav.Link href="#">News</Nav.Link>
+              <Nav.Link href="#">Category</Nav.Link>
               <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item className="d-lg-none d-md-block">
@@ -147,9 +150,7 @@ const Header = () => {
         aria-labelledby="example-modal-sizes-title-sm"
       >
         <Modal.Header closeButton>
-          <Modal.Title id="example-modal-sizes-title-sm">
-            Small Modal
-          </Modal.Title>
+          <Modal.Title id="example-modal-sizes-title-sm">Login</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {!user?.uid ? (
@@ -191,9 +192,7 @@ const Header = () => {
         aria-labelledby="example-modal-sizes-title-lg"
       >
         <Modal.Header closeButton>
-          <Modal.Title id="example-modal-sizes-title-lg">
-            Large Modal
-          </Modal.Title>
+          <Modal.Title id="example-modal-sizes-title-lg">Register</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {!user?.uid ? (
@@ -213,6 +212,7 @@ const Header = () => {
                   type="text"
                   placeholder="Insert the url of photo"
                   name="photoURL"
+                  required
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -243,7 +243,21 @@ const Header = () => {
                   required
                 />
               </Form.Group>
-              <Button variant="primary" type="submit">
+              <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <Form.Check
+                  type="checkbox"
+                  onClick={handleChecked}
+                  label={
+                    <>
+                      I agree with{" "}
+                      <Link to="/terms" onClick={() => setRegister(false)}>
+                        terms and conditions
+                      </Link>
+                    </>
+                  }
+                />
+              </Form.Group>
+              <Button variant="primary" type="submit" disabled={!checked}>
                 Register
               </Button>
             </Form>

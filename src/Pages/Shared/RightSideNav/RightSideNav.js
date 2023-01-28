@@ -24,8 +24,8 @@ const RightSideNav = () => {
             {
                 !user?.uid &&
                 <ButtonGroup vertical className="d-grid gap-2">
-                    <Button onClick={handleGoogleSignIn} size="lg" variant='outline-primary' className='w-100 px-5'>Sign in with <FaGoogle /></Button>
-                    <Button size="lg" variant='outline-dark' className='w-100 px-5'>Sign in with <FaGithub /></Button>
+                    <Button onClick={handleGoogleSignIn} size="lg" variant='outline-primary' className='w-100 px-5 rounded'>Sign in with <FaGoogle /></Button>
+                    <Button size="lg" variant='outline-dark' className='w-100 px-5 rounded'>Sign in with <FaGithub /></Button>
                 </ButtonGroup>
             }
             <ListGroup className='my-3'>

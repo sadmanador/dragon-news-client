@@ -1,4 +1,6 @@
 import Login from "../Pages/Login/Login";
+import Terms from "../Pages/Others/Terms/Terms";
+import Register from "../Pages/Register/Register";
 import PrivateRoutes from "./PrivateRoutes/PrivateRoutes";
 
 const { createBrowserRouter } = require("react-router-dom");
@@ -41,6 +43,14 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login></Login>
+      },
+      {
+        path: "/register",
+        element: <Register></Register>
+      },
+      {
+        path: "/terms",
+        element: <Terms></Terms>
       },
     ],
   },
