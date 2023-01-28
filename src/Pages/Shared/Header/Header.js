@@ -97,7 +97,7 @@ const Header = () => {
                                 {
                                     user?.uid ?
                                         <>
-                                            <Image />
+                                            <Image src={user?.photoURL} style={{height: "40px"}} className='rounded-circle me-3'/>
                                             <span className='me-3'>{user?.displayName}</span>
                                             <Button variant='light' onClick={handleLogOut}>Log Out</Button>
                                         </>
