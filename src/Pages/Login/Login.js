@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { toast } from "react-hot-toast";
 import { FaGoogle } from "react-icons/fa";
@@ -6,10 +6,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const Login = () => {
-  const { userLogIn, setRegister, setError, setLoading } = useContext(AuthContext);
+  const { userLogIn, setRegister, setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+  const [error, setError] = useState(null);
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -27,11 +28,9 @@ const Login = () => {
         } else {
           toast.error("Your email is not verified, Please verify your email");
         }
-        navigate(from, { replace: true });
       })
       .catch((error) => {
         setError(error.message);
-
       })
       .finally(() => {
         setLoading(false)

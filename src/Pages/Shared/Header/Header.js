@@ -15,6 +15,7 @@ const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
+  const [error, setError] = useState(null);
 
   const {
     user,
@@ -31,9 +32,7 @@ const Header = () => {
     handleChecked,
   } = useContext(AuthContext);
 
-  const [error, setError] = useState(null);
-
-  const handleLogIN = (event) => {
+  const handleLogIn = (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
@@ -42,7 +41,6 @@ const Header = () => {
     userLogIn(email, password)
       .then((result) => {
         const user = result.user;
-        navigate("/");
         setLogin(false);
         form.reset();
         setError("");
@@ -51,7 +49,6 @@ const Header = () => {
         } else {
           toast.error("Your email is not verified, Please verify your email");
         }
-        navigate(from, { replace: true });
       })
       .catch((error) => setError(error.message));
   };
@@ -170,7 +167,7 @@ const Header = () => {
         </Modal.Header>
         <Modal.Body>
           {!user?.uid ? (
-            <Form onSubmit={handleLogIN}>
+            <Form onSubmit={handleLogIn}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control

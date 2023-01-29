@@ -39,11 +39,11 @@ const AuthProvider = ({ children }) => {
 
   const verifyUserEmail = () => {
     return sendEmailVerification(auth.currentUser);
-  }
+  };
 
   const userLogIn = (email, password) => {
     setLoading(true);
-    signInWithEmailAndPassword(auth, email, password);
+    return signInWithEmailAndPassword(auth, email, password);
   };
 
   const updateDisplayName = (name, photoUrl) => {
@@ -55,15 +55,18 @@ const AuthProvider = ({ children }) => {
       .catch((error) => setError(error));
   };
 
-  const handleChecked = event => {
+  const handleChecked = (event) => {
     setChecked(event.target.checked);
-  }
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      if (currentUser === null || currentUser.emailVerified) {
+        setUser(currentUser);
+      }
       setLoading(false);
     });
+
     return () => {
       unsubscribe();
     };
@@ -86,7 +89,7 @@ const AuthProvider = ({ children }) => {
     checked,
     setChecked,
     handleChecked,
-    verifyUserEmail
+    verifyUserEmail,
   };
 
   return (
