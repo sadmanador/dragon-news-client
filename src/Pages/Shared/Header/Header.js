@@ -7,11 +7,15 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { toast } from "react-hot-toast";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 import LeftSideNav from "../LeftSideNav/LeftSideNav";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
   const {
     user,
     loggingOut,
@@ -29,8 +33,6 @@ const Header = () => {
 
   const [error, setError] = useState(null);
 
-  const navigate = useNavigate();
-
   const handleLogIN = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -43,6 +45,13 @@ const Header = () => {
         navigate("/");
         setLogin(false);
         form.reset();
+        setError("");
+        if (user.emailVerified) {
+          navigate(from, { replace: true });
+        } else {
+          toast.error("Your email is not verified, Please verify your email");
+        }
+        navigate(from, { replace: true });
       })
       .catch((error) => setError(error.message));
   };
@@ -78,14 +87,13 @@ const Header = () => {
         form.reset();
         navigate("/");
         handleEmailVerification();
-        toast.success('Check your email to verify');
+        toast.success("Check your email to verify");
       })
       .catch((error) => setError(error.message));
   };
 
-  const handleEmailVerification= ()=> {
-    verifyUserEmail()
-    .then(()=>{})
+  const handleEmailVerification = () => {
+    verifyUserEmail().then(() => {});
   };
 
   const handleLogOut = () => {
@@ -118,7 +126,7 @@ const Header = () => {
               </NavDropdown>
             </Nav>
             <Nav>
-              <Nav.Link href="#deets" className="mx-3">
+              <Nav.Link href="#" className="mx-3">
                 {user?.uid ? (
                   <>
                     <Image
