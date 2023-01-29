@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  sendEmailVerification,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -35,6 +36,10 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
+
+  const verifyUserEmail = () => {
+    return sendEmailVerification(auth.currentUser);
+  }
 
   const userLogIn = (email, password) => {
     setLoading(true);
@@ -80,7 +85,8 @@ const AuthProvider = ({ children }) => {
     setLoading,
     checked,
     setChecked,
-    handleChecked
+    handleChecked,
+    verifyUserEmail
   };
 
   return (

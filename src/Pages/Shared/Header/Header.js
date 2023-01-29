@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { toast } from "react-hot-toast";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
@@ -22,8 +23,8 @@ const Header = () => {
     login,
     register,
     checked,
-    setChecked,
-    handleChecked
+    verifyUserEmail,
+    handleChecked,
   } = useContext(AuthContext);
 
   const [error, setError] = useState(null);
@@ -76,8 +77,15 @@ const Header = () => {
         setRegister(false);
         form.reset();
         navigate("/");
+        handleEmailVerification();
+        toast.success('Check your email to verify');
       })
       .catch((error) => setError(error.message));
+  };
+
+  const handleEmailVerification= ()=> {
+    verifyUserEmail()
+    .then(()=>{})
   };
 
   const handleLogOut = () => {

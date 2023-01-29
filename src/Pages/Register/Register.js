@@ -1,12 +1,19 @@
 import React, { useContext, useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import { toast } from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider/AuthProvider";
 
 const Register = () => {
   const [error, setError] = useState(null);
-  const { user, createUser, updateDisplayName, checked, setChecked, handleChecked } =
-    useContext(AuthContext);
+  const {
+    user,
+    createUser,
+    updateDisplayName,
+    checked,
+    handleChecked,
+    verifyUserEmail,
+  } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleRegister = (event) => {
@@ -36,9 +43,17 @@ const Register = () => {
       .then((result) => {
         const user = result.user;
         updateDisplayName(name, photoUrl);
+        handleEmailVerification();
         form.reset();
         navigate("/");
+        toast.success('Check your email to verify');
       })
+      .catch((error) => setError(error.message));
+  };
+
+  const handleEmailVerification = () => {
+    verifyUserEmail()
+      .then(() => {})
       .catch((error) => setError(error.message));
   };
 
@@ -94,7 +109,7 @@ const Register = () => {
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check
-                onClick={handleChecked}
+              onClick={handleChecked}
               type="checkbox"
               label={
                 <>
