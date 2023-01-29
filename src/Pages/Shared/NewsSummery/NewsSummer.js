@@ -29,7 +29,7 @@ const NewsSummer = ({ news }) => {
             roundedCircle
           />
           <div>
-            <p className="mb-0">{name}</p>
+            <p className="mb-0 fw-semibold">{name}</p>
             <p>{published_date}</p>
           </div>
         </div>
