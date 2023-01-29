@@ -3,6 +3,7 @@ import Image from "react-bootstrap/Image";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import { FaEye, FaRegBookmark, FaShareAlt, FaStar } from "react-icons/fa";
+import { Rating } from "@mui/material";
 
 const NewsSummer = ({ news }) => {
   const {
@@ -54,11 +55,18 @@ const NewsSummer = ({ news }) => {
       </Card.Body>
       <Card.Footer className="text-muted d-flex justify-content-between align-items-center">
         <div>
-          <FaStar className="me-2 text-warning"/>
-            <span>{rating?.number}</span>
+          {/* <FaStar className="me-2 text-warning"/>
+            <span>{rating?.number}</span> */}
+
+          <Rating
+            name="half-rating-read"
+            defaultValue={rating?.number}
+            precision={0.5}
+            readOnly
+          />
         </div>
         <div>
-          <FaEye className="me-2"/>
+          <FaEye className="me-2" />
           <span>{total_view}</span>
         </div>
       </Card.Footer>
