@@ -11,7 +11,7 @@ const ProfileInfo = () => {
       <div className="row">
         <div className="col col-lg-4">
           <Image
-            style={{ height: "150px" }}
+            style={{ height: "100px" }}
             className="rounded-circle"
             src={user?.photoURL}
           ></Image>
@@ -31,7 +31,6 @@ const ProfileInfo = () => {
               <Form.Label>Name</Form.Label>
               <Form.Control
                 type="email"
-                placeholder="Enter email"
                 value={user?.displayName}
                 readOnly
               />

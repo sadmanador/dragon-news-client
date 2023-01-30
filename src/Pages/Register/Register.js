@@ -42,11 +42,11 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         const user = result.user;
-        updateDisplayName(name, photoUrl);
+        updateProfile(name, photoUrl);
         handleEmailVerification();
         form.reset();
         navigate("/");
-        toast.success('Check your email to verify');
+        toast.success("Check your email to verify");
       })
       .catch((error) => setError(error.message));
   };
@@ -55,6 +55,12 @@ const Register = () => {
     verifyUserEmail()
       .then(() => {})
       .catch((error) => setError(error.message));
+  };
+
+  const updateProfile = (name, photoUrl) => {
+    updateDisplayName(name, photoUrl)
+      .then(() => {})
+      .catch((error) => setError(error));
   };
 
   return (

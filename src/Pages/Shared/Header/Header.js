@@ -79,7 +79,7 @@ const Header = () => {
     createUser(email, password)
       .then((result) => {
         const user = result.user;
-        updateDisplayName(name, photoUrl);
+        updateProfile(name, photoUrl);
         setRegister(false);
         form.reset();
         navigate("/");
@@ -88,6 +88,12 @@ const Header = () => {
       })
       .catch((error) => setError(error.message));
   };
+
+  const updateProfile = (name, photoUrl) => {
+    updateDisplayName(name, photoUrl)
+    .then(()=>{})
+    .catch(error=> setError(error.message))
+  }
 
   const handleEmailVerification = () => {
     verifyUserEmail().then(() => {});

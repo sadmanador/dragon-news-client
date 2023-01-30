@@ -1,7 +1,6 @@
 import Profile from "../layouts/Profile";
 import Login from "../Pages/Login/Login";
 import DeleteAccount from "../Pages/Others/Profile/DeleteAccount/DeleteAccount";
-import PasswordReset from "../Pages/Others/Profile/PasswordReset/PasswordReset";
 import PasswordResetEmail from "../Pages/Others/Profile/PasswordResetEmail/PasswordResetEmail";
 import ProfileInfo from "../Pages/Others/Profile/ProfileInfo/ProfileInfo";
 import ProfileUpdate from "../Pages/Others/Profile/ProfileUpdate/ProfileUpdate";
@@ -41,10 +40,6 @@ export const router = createBrowserRouter([
           {
             path: '/profile/profile-update',
             element: <ProfileUpdate></ProfileUpdate>
-          },
-          {
-            path: '/profile/password-reset',
-            element: <PasswordReset></PasswordReset>
           },
           {
             path: '/profile/delete-account',

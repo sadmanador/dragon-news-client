@@ -4,9 +4,11 @@ import {
   getAuth,
   onAuthStateChanged,
   sendEmailVerification,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updatePassword,
   updateProfile,
 } from "firebase/auth";
 import { app } from "../../firebase/firebase.config";
@@ -47,12 +49,14 @@ const AuthProvider = ({ children }) => {
   };
 
   const updateDisplayName = (name, photoUrl) => {
-    updateProfile(auth.currentUser, {
+    return updateProfile(auth.currentUser, {
       displayName: name,
       photoURL: photoUrl,
-    })
-      .then(() => {})
-      .catch((error) => setError(error));
+    });
+  };
+
+  const passwordReset = (email) => {
+    return sendPasswordResetEmail(auth, email)
   };
 
   const handleChecked = (event) => {
@@ -90,6 +94,7 @@ const AuthProvider = ({ children }) => {
     setChecked,
     handleChecked,
     verifyUserEmail,
+    passwordReset
   };
 
   return (
