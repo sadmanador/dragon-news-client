@@ -4,15 +4,13 @@ import ProfileSideNav from '../Pages/Others/Profile/ProfileSideNav/ProfileSideNa
 
 const Profile = () => {
     return (
-        <main>
-            <div className="row">
-                <div className="col col-lg-4">
+        <main className='row bg-light rounded-4 shadow py-5'>
+                <div className="col col-lg-3">
                     <ProfileSideNav></ProfileSideNav>
                 </div>
-                <div className="col col-lg-8">
+                <div className="col col-lg-9">
                     <Outlet></Outlet>
                 </div>
-            </div>
         </main>
     );
 };

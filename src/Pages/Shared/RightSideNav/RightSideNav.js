@@ -28,7 +28,7 @@ const RightSideNav = () => {
                     <Button size="lg" variant='outline-dark' className='w-100 px-5 rounded'>Sign in with <FaGithub /></Button>
                 </ButtonGroup>
             }
-            <ListGroup className='my-3'>
+            <ListGroup className='my-3 text-center shadow bg-light'>
                 <ListGroup.Item><FaFacebook className='me-2'/> Facebook</ListGroup.Item>
                 <ListGroup.Item><FaWhatsapp className='me-2'/> WhatsApp</ListGroup.Item>
                 <ListGroup.Item><FaTwitter className='me-2'/> Twitter</ListGroup.Item>

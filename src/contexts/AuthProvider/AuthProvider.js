@@ -1,12 +1,14 @@
 import {
   createUserWithEmailAndPassword,
+  deleteUser,
   getAuth,
   onAuthStateChanged,
   sendEmailVerification,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
-  signOut, updateProfile
+  signOut,
+  updateProfile,
 } from "firebase/auth";
 import React, { createContext, useEffect, useState } from "react";
 import { app } from "../../firebase/firebase.config";
@@ -61,6 +63,10 @@ const AuthProvider = ({ children }) => {
     setChecked(event.target.checked);
   };
 
+  const deleteProfile = () => {
+    return deleteUser(auth.currentUser);
+  };
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser === null || currentUser.emailVerified) {
@@ -93,7 +99,8 @@ const AuthProvider = ({ children }) => {
     handleChecked,
     verifyUserEmail,
     passwordReset,
-    setError
+    setError,
+    deleteProfile,
   };
 
   return (

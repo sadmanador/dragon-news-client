@@ -3,8 +3,8 @@ import { Form, Image } from "react-bootstrap";
 import { AuthContext } from "../../../../contexts/AuthProvider/AuthProvider";
 
 const ProfileInfo = () => {
-  const { user, setLoading } = useContext(AuthContext);
-  setLoading(true);
+  const { user } = useContext(AuthContext);
+
   return (
     <div>
       <h2 className="text-center mb-5">Profile Info</h2>

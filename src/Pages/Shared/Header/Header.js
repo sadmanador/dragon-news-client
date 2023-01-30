@@ -111,7 +111,7 @@ const Header = () => {
         expand="lg"
         bg="dark"
         variant="dark"
-        className="mb-4"
+        className="mb-4 shadow"
       >
         <Container>
           <Navbar.Brand href="/">Dragon News</Navbar.Brand>
@@ -135,10 +135,10 @@ const Header = () => {
                       <Image
                         src={user?.photoURL}
                         style={{ height: "40px" }}
-                        className="rounded-circle me-3"
+                        className="rounded-circle me-3 shadow"
                       />
                     </Link>
-                    <span className="me-3 text-white">{user?.displayName}</span>
+                    <span className="me-3 text-secondary fw-semibold">{user?.displayName}</span>
                     <Button variant="light" onClick={handleLogOut}>
                       Log Out
                     </Button>

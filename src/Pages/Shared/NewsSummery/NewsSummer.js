@@ -19,7 +19,7 @@ const NewsSummer = ({ news }) => {
   const { img, name, published_date } = author;
   const { number } = rating;
   return (
-    <Card className="mb-4 shadow">
+    <Card className="mb-4 border-0 shadow">
       <Card.Header className="d-flex justify-content-between align-items-center">
         <div className="d-flex">
           <Image
