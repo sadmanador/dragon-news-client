@@ -123,15 +123,17 @@ const Header = () => {
               </NavDropdown>
             </Nav>
             <Nav>
-              <Nav.Link href="#" className="mx-3">
+              <Nav.Item href="#" className="mx-3">
                 {user?.uid ? (
                   <>
-                    <Image
-                      src={user?.photoURL}
-                      style={{ height: "40px" }}
-                      className="rounded-circle me-3"
-                    />
-                    <span className="me-3">{user?.displayName}</span>
+                    <Link to='/profile'>
+                      <Image
+                        src={user?.photoURL}
+                        style={{ height: "40px" }}
+                        className="rounded-circle me-3"
+                      />
+                    </Link>
+                    <span className="me-3 text-white">{user?.displayName}</span>
                     <Button variant="light" onClick={handleLogOut}>
                       Log Out
                     </Button>
@@ -150,7 +152,7 @@ const Header = () => {
                     </Button>
                   </>
                 )}
-              </Nav.Link>
+              </Nav.Item>
             </Nav>
           </Navbar.Collapse>
         </Container>
