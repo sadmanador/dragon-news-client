@@ -78,7 +78,6 @@ const Header = () => {
 
     createUser(email, password)
       .then((result) => {
-        const user = result.user;
         updateProfile(name, photoUrl);
         setRegister(false);
         form.reset();

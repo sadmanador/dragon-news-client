@@ -1,4 +1,3 @@
-import React, { createContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -7,10 +6,9 @@ import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
-  signOut,
-  updatePassword,
-  updateProfile,
+  signOut, updateProfile
 } from "firebase/auth";
+import React, { createContext, useEffect, useState } from "react";
 import { app } from "../../firebase/firebase.config";
 
 export const AuthContext = createContext();
@@ -56,7 +54,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const passwordReset = (email) => {
-    return sendPasswordResetEmail(auth, email)
+    return sendPasswordResetEmail(auth, email);
   };
 
   const handleChecked = (event) => {
@@ -94,7 +92,8 @@ const AuthProvider = ({ children }) => {
     setChecked,
     handleChecked,
     verifyUserEmail,
-    passwordReset
+    passwordReset,
+    setError
   };
 
   return (
