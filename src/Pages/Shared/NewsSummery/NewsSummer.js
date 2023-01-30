@@ -23,7 +23,7 @@ const NewsSummer = ({ news }) => {
       <Card.Header className="d-flex justify-content-between align-items-center">
         <div className="d-flex">
           <Image
-            className="me-3"
+            className="me-3 shadow"
             src={img}
             alt="Author-img"
             style={{ width: "50px", height: "100%" }}
@@ -42,7 +42,7 @@ const NewsSummer = ({ news }) => {
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Img variant="top" src={thumbnail_url} />
-        <Card.Text>
+        <Card.Text className="my-4 mx-3">
           {details.length > 250 ? (
             <span>
               {details.slice(0, 250) + "... "}{" "}
