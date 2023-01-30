@@ -2,6 +2,7 @@ import Profile from "../layouts/Profile";
 import Login from "../Pages/Login/Login";
 import DeleteAccount from "../Pages/Others/Profile/DeleteAccount/DeleteAccount";
 import PasswordReset from "../Pages/Others/Profile/PasswordReset/PasswordReset";
+import PasswordResetEmail from "../Pages/Others/Profile/PasswordResetEmail/PasswordResetEmail";
 import ProfileInfo from "../Pages/Others/Profile/ProfileInfo/ProfileInfo";
 import ProfileUpdate from "../Pages/Others/Profile/ProfileUpdate/ProfileUpdate";
 import Terms from "../Pages/Others/Terms/Terms";
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
             path: '/profile/delete-account',
             element: <DeleteAccount></DeleteAccount>
           },
+          {
+            path: '/profile/password-reset-email',
+            element: <PasswordResetEmail></PasswordResetEmail>
+          }
         ]
       },
       {

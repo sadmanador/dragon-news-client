@@ -11,7 +11,7 @@ const ProfileInfo = () => {
       <div className="row">
         <div className="col col-lg-4">
           <Image
-            style={{ height: "100px" }}
+            style={{ height: "150px" }}
             className="rounded-circle"
             src={user?.photoURL}
           ></Image>
