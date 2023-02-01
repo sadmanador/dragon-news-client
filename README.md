@@ -1,4 +1,4 @@
-# firebase live deploy: https://dragon-news-a27f0.web.app
+# firebase live deploy: https://relaxed-platypus-54a9d0.netlify.app/
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
