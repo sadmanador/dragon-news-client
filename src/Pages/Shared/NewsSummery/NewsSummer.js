@@ -1,4 +1,4 @@
-import { Rating } from "@mui/material";
+import { Box, Rating } from "@mui/material";
 import React from "react";
 import Card from "react-bootstrap/Card";
 import Image from "react-bootstrap/Image";
@@ -55,15 +55,15 @@ const NewsSummer = ({ news }) => {
       </Card.Body>
       <Card.Footer className="text-muted d-flex justify-content-between align-items-center">
         <div>
-          {/* <FaStar className="me-2 text-warning"/>
-            <span>{rating?.number}</span> */}
-
+        <p className="ms-2 mb-0 fw-semibold">Rating: {rating?.number}</p>
           <Rating
             name="half-rating-read"
             defaultValue={rating?.number}
             precision={0.5}
             readOnly
           />
+  
+         
         </div>
         <div>
           <FaEye className="me-2" />
