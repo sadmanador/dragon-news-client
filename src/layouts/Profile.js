@@ -5,10 +5,10 @@ import ProfileSideNav from '../Pages/Others/Profile/ProfileSideNav/ProfileSideNa
 const Profile = () => {
     return (
         <main className='row bg-light rounded-4 shadow py-5'>
-                <div className="col col-lg-3">
+                <div className="col col-lg-4">
                     <ProfileSideNav></ProfileSideNav>
                 </div>
-                <div className="col col-lg-9">
+                <div className="col col-lg-8">
                     <Outlet></Outlet>
                 </div>
         </main>

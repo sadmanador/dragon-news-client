@@ -1,9 +1,9 @@
-import React from "react";
-import Image from "react-bootstrap/Image";
-import Card from "react-bootstrap/Card";
-import { Link } from "react-router-dom";
-import { FaEye, FaRegBookmark, FaShareAlt, FaStar } from "react-icons/fa";
 import { Rating } from "@mui/material";
+import React from "react";
+import Card from "react-bootstrap/Card";
+import Image from "react-bootstrap/Image";
+import { FaEye, FaRegBookmark, FaShareAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const NewsSummer = ({ news }) => {
   const {
